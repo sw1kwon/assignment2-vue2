@@ -31,7 +31,7 @@
 
 <script>
 import { ref, onMounted, onUnmounted, watch } from "vue";
-import { useWishlist } from "@/services/WishlistService"; // WishlistService를 별도의 모듈로 작성
+import { useWishlist } from "@/util/movie/wishlist"; // WishlistService를 별도의 모듈로 작성
 
 export default {
   name: "MovieWishlist",
