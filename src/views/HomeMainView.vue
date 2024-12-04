@@ -12,7 +12,7 @@
 import { onMounted, onBeforeUnmount, ref } from "vue";
 import Banner from "@/components/home-main/Banner.vue";
 import MovieRow from "@/components/home-main/MovieRow.vue";
-import URLService from "@/util/movie/URL";
+import { URLService } from "@/util/movie/URL";
 
 export default {
   name: "HomeMain",
@@ -29,16 +29,23 @@ export default {
     const scrollListener = ref(null);
 
     const loadFeaturedMovie = async () => {
-      featuredMovie.value = await URLService.fetchFeaturedMovie(apiKey);
+      const movie = await URLService.fetchFeaturedMovie(apiKey);
+      if (movie) {
+        featuredMovie.value = movie;
+      } else {
+        console.error("Failed to load featured movie");
+      }
     };
 
     const initializeScrollListener = () => {
       scrollListener.value = () => {
         const header = document.querySelector(".app-header");
-        if (window.scrollY > 50) {
-          header?.classList.add("scrolled");
-        } else {
-          header?.classList.remove("scrolled");
+        if (header) {
+          if (window.scrollY > 50) {
+            header.classList.add("scrolled");
+          } else {
+            header.classList.remove("scrolled");
+          }
         }
       };
 
