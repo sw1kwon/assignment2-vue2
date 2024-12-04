@@ -1,18 +1,28 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div id="app">
+    <Header /> <!-- Angular의 <app-header>를 Vue의 컴포넌트로 대체 -->
+    <div id="container">
+      <router-view /> <!-- Angular의 <router-outlet>를 Vue의 <router-view>로 대체 -->
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+<script>
+import Header from "@/components/header/Header.vue"; // Header 컴포넌트를 import
 
-@Options({
+export default {
+  name: "HomeView",
   components: {
-    HelloWorld,
+    Header, // Header 컴포넌트를 등록
   },
-})
-export default class HomeView extends Vue {}
+};
 </script>
+
+<style scoped>
+#app {
+  width: 95vw; /* svw → vw (CSS 단위 수정) */
+  height: 95vh; /* svh → vh */
+  overflow-x: hidden;
+  margin: auto;
+}
+</style>
